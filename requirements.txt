@@ -1,0 +1,4 @@
+appdirs ~= 1.4
+python-whois ~= 0.7
+mysqlclient ~= 2.1
+dnspython ~= 2.2
