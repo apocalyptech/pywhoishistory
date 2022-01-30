@@ -1,0 +1,77 @@
+BODY {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#whoisform {
+    width: 20em;
+    border: 2px solid black;
+    padding: 1em;
+    background: paleturquoise;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1em;
+}
+
+.version {
+    margin-top: .2em;
+    font-size: x-small;
+}
+
+.errors {
+    color: red;
+}
+
+h1 {
+    border-bottom: 1px solid black;
+    margin-bottom: 0.5em;
+}
+
+.domain_state {
+    margin-left: 1em;
+}
+
+.domain_state tr td {
+    padding-bottom: 0.4em;
+}
+
+.state_label {
+    text-align: right;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.state_value ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 1.5em;
+}
+
+.link_button {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    font-size: smaller;
+}
+
+.hide_raw_link {
+    display: none;
+}
+
+.raw_data {
+    display: none;
+    border: 2px solid silver;
+    background: #eee;
+    padding: 2em;
+}
+
+.no_changes {
+    font-style: italic;
+    margin-top: 1em;
+}
+
+h2 {
+    padding-left: 0em;
+    font-size: larger;
+    text-decoration: underline;
+}
+

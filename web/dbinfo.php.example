@@ -1,0 +1,12 @@
+<?php // vim: set expandtab tabstop=4 shiftwidth=4:
+
+// NOTE: To actually use the port here, specify an IP address (such as
+// 127.0.0.1) instead of `localhost`, otherwise mysqli will use local
+// sockets silently without telling you, ignoring the `port` parameter
+// entirely.
+$dbhost = 'localhost';
+$dbport = 3306;
+$dbname = 'DBNAME';
+$dbuser = 'DBUSER';
+$dbpass = 'DBPASS';
+
