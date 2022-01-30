@@ -283,6 +283,14 @@ someone else submits a PR, I'd at least consider it
 - A fully-featured web frontend.  This has to be configured on the shell
   to get into cron/whatever anyway, and the CLI is almost certainly where
   95% of my interaction will be.
+- Note that this software wasn't really written with any kind of
+  scalability in mind.  With the default 30-second delay between lookups,
+  you'd be able to process at most 120 domains in a single hour.  whois
+  isn't always the most reliable service to query, too, so you'd doubtless
+  start encountering frequent timeouts and the like, with that many.  My
+  personal use case for this is very unlikely to ever exceed one or two
+  dozen domains, so that doesn't bother me, but a smarter system would
+  probably need to be put in place to make this properly scalable.
 
 License
 =======
