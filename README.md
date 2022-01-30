@@ -265,6 +265,9 @@ TODO
     proposed poor-man's version.
 - Might be nice to be able to specify an alternate config file location, for
   the database connection params?
+- The web frontend has some pretty aggressive checking on the passed-in
+  domain names which restricts them to real basic ASCII-char domains, which
+  wouldn't be appropriate for many use cases.
 
 Not TODO
 ========
