@@ -40,7 +40,7 @@ import datetime
 import configparser
 import dns.resolver
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 class DNSBehavior(enum.Enum):
     DOMAIN_DEFAULT = enum.auto()

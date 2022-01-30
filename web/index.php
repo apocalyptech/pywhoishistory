@@ -35,7 +35,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 */
 
-$app_version = 'pywhoishistory web frontend v1.0.0';
+$app_version = 'pywhoishistory web frontend v1.0.1';
 
 // Using PHP 7.x, so I guess no native PHP enums for me?
 $TYPE_STR = 1;
@@ -71,9 +71,24 @@ require_once('dbinfo.php');
 $db = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport);
 if ($db->connect_errno)
 {
-    print('Error connecting to database: ' . $db->connect_error);
+    print 'Error connecting to database: ' . $db->connect_error;
     exit;
 }
+
+// Doublecheck that our database is at the correct version.  If I ever bump
+// up the DB ver, I'll have to see if it's worth it to make this web component
+// backwards-compatible.  For now, I'll just require v1.
+$stmt = $db->prepare('select value from param where param="db_ver"');
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+if ($row['value'] != 1)
+{
+    print 'ERROR: Database version ' . $row['value'] . ' is not supported.';
+    exit;
+}
+$result->close();
+$stmt->close();
 
 // Do some sanity checks on our $_REQUEST['d'], if we have it.  At the moment
 // this is being real strict and is only allowing some basic ASCII chars in

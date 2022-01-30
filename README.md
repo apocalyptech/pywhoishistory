@@ -254,8 +254,6 @@ you can use the `--wipe-database` option:
 TODO
 ====
 
-- Web frontend should be checking on our `db_ver` param, and aborting if
-  it sees a database version it doesn't understand.
 - Would be nice to be more database-agnostic.  I'd originally planned
   to just use SQLite, which would probably be more useful to most folks,
   but it seemed easier to use a "real" DB on account of the web frontend.
@@ -295,6 +293,9 @@ See [COPYING.txt](COPYING.txt) for the full text of the license.
 
 Changelog
 =========
+
+**v1.0.1**: *2022-01-27*
+ - Web frontend correctly checks database version before proceeding
 
 **(no version change)** - *2022-01-29*
  - Added PHP web frontend
