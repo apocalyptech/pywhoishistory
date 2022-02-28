@@ -40,7 +40,7 @@ import datetime
 import configparser
 import dns.resolver
 
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 class DNSBehavior(enum.Enum):
     DOMAIN_DEFAULT = enum.auto()
@@ -615,13 +615,13 @@ class App:
         # Main A/AAAA record(s) of the domain itself
         ips = set()
         try:
-            answers = dns.resolver.query(domain, 'A')
+            answers = dns.resolver.resolve(domain, 'A')
             for rdata in answers:
                 ips.add(rdata.address)
         except dns.resolver.NoAnswer:
             pass
         try:
-            answers = dns.resolver.query(domain, 'AAAA')
+            answers = dns.resolver.resolve(domain, 'AAAA')
             for rdata in answers:
                 ips.add(rdata.address)
         except dns.resolver.NoAnswer:
@@ -631,7 +631,7 @@ class App:
         # Now MXes
         mx = set()
         try:
-            answers = dns.resolver.query(domain, 'MX')
+            answers = dns.resolver.resolve(domain, 'MX')
             for rdata in answers:
                 exch = str(rdata.exchange)
                 if exch.endswith('.'):

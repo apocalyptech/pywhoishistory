@@ -35,7 +35,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 */
 
-$app_version = 'pywhoishistory web frontend v1.0.1';
+$app_version = 'pywhoishistory web frontend v1.0.2';
 
 // Using PHP 7.x, so I guess no native PHP enums for me?
 $TYPE_STR = 1;

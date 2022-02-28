@@ -302,6 +302,10 @@ See [COPYING.txt](COPYING.txt) for the full text of the license.
 Changelog
 =========
 
+**v1.0.2**: *2022-02-28*
+ - Switch from deprecated `dns.resolver.query` to `dns.resolver.resolve`
+   (no actual functionality changes)
+
 **v1.0.1**: *2022-01-27*
  - Web frontend correctly checks database version before proceeding
 
