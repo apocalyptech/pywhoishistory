@@ -40,7 +40,7 @@ import datetime
 import configparser
 import dns.resolver
 
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 class DNSBehavior(enum.Enum):
     DOMAIN_DEFAULT = enum.auto()
@@ -604,6 +604,25 @@ class App:
         # Emails -- likely to show up as a list
         if type(parsed_data['emails']) == list:
             parsed_data['emails'] = ', '.join(sorted(parsed_data['emails']))
+
+        # Contact fields -- we started having one domain show up with more
+        # than one value in here, where one was `REDACTED FOR PRIVACY`, and
+        # the other was what we're more used to.  If there's a list for these,
+        # and one of them is that string, ignore that one.  Then comma-separate
+        # any remaining entries.
+        for key in ['name', 'org', 'address', 'city', 'state', 'zipcode']:
+            if type(parsed_data[key]) == list:
+                new_list = list(parsed_data[key])
+                try:
+                    # I actually don't think that this'll ever show up as a
+                    # list unless there are at least two elements, but I may
+                    # as well check anyway.
+                    if len(new_list) > 1:
+                        redacted_idx = new_list.index('REDACTED FOR PRIVACY')
+                        del new_list[redacted_idx]
+                except ValueError:
+                    pass
+                parsed_data[key] = ', '.join(sorted(new_list))
 
     def _inject_dns_lookups(self, domain, parsed_data):
         """

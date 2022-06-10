@@ -302,6 +302,10 @@ See [COPYING.txt](COPYING.txt) for the full text of the license.
 Changelog
 =========
 
+**v1.0.3**: *2022-06-10*
+ - Handle getting multiple contact-info entries in whois lookups (name,
+   address, etc)
+
 **v1.0.2**: *2022-02-28*
  - Switch from deprecated `dns.resolver.query` to `dns.resolver.resolve`
    (no actual functionality changes)
