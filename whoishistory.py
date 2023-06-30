@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # vim: set expandtab tabstop=4 shiftwidth=4:
 
-# Copyright 2022 Christopher J. Kucera
+# Copyright 2022-2023 Christopher J. Kucera
 # <cj@apocalyptech.com>
-# <http://apocalyptech.com/contact.php>
+# <https://apocalyptech.com/contact.php>
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -40,7 +40,7 @@ import datetime
 import configparser
 import dns.resolver
 
-__version__ = '1.0.3'
+__version__ = '1.0.4'
 
 class DNSBehavior(enum.Enum):
     DOMAIN_DEFAULT = enum.auto()
@@ -605,24 +605,31 @@ class App:
         if type(parsed_data['emails']) == list:
             parsed_data['emails'] = ', '.join(sorted(parsed_data['emails']))
 
+        # Zipcode -- it seems this is now showing up as `registrant_postal_code`
+        if 'zipcode' not in parsed_data and 'registrant_postal_code' in parsed_data:
+            parsed_data['zipcode'] = parsed_data['registrant_postal_code']
+
         # Contact fields -- we started having one domain show up with more
         # than one value in here, where one was `REDACTED FOR PRIVACY`, and
         # the other was what we're more used to.  If there's a list for these,
         # and one of them is that string, ignore that one.  Then comma-separate
         # any remaining entries.
         for key in ['name', 'org', 'address', 'city', 'state', 'zipcode']:
-            if type(parsed_data[key]) == list:
-                new_list = list(parsed_data[key])
-                try:
-                    # I actually don't think that this'll ever show up as a
-                    # list unless there are at least two elements, but I may
-                    # as well check anyway.
-                    if len(new_list) > 1:
-                        redacted_idx = new_list.index('REDACTED FOR PRIVACY')
-                        del new_list[redacted_idx]
-                except ValueError:
-                    pass
-                parsed_data[key] = ', '.join(sorted(new_list))
+            if key in parsed_data:
+                if type(parsed_data[key]) == list:
+                    new_list = list(parsed_data[key])
+                    try:
+                        # I actually don't think that this'll ever show up as a
+                        # list unless there are at least two elements, but I may
+                        # as well check anyway.
+                        if len(new_list) > 1:
+                            redacted_idx = new_list.index('REDACTED FOR PRIVACY')
+                            del new_list[redacted_idx]
+                    except ValueError:
+                        pass
+                    parsed_data[key] = ', '.join(sorted(new_list))
+            else:
+                parsed_data[key] = 'n/a'
 
     def _inject_dns_lookups(self, domain, parsed_data):
         """

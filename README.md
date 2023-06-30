@@ -302,6 +302,10 @@ See [COPYING.txt](COPYING.txt) for the full text of the license.
 Changelog
 =========
 
+**v1.0.4**: *2023-06-30*
+ - Handle `registrant_postal_code` zipcode labelling in whois results
+ - Handle missing address fields better
+
 **v1.0.3**: *2022-06-10*
  - Handle getting multiple contact-info entries in whois lookups (name,
    address, etc)
